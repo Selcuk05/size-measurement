@@ -205,7 +205,6 @@ class MeasurementMethod(Config):
 
     class Config:
         title = "Measurement Method"
-        json_schema_extra = {"target": "value"}
 
 
 class InputDetections(Input):
