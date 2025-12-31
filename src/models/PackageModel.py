@@ -110,7 +110,8 @@ class ReferenceObjectMethod(Config):
     name: Literal["ReferenceObjectMethod"] = "ReferenceObjectMethod"
     referenceObject: ReferenceObjectSelection
     referenceSize: ReferenceSize
-    type: Literal["object"] = "object"
+    value: Literal["ReferenceObjectMethod"] = "ReferenceObjectMethod"
+    type: Literal["string"] = "string"
     field: Literal["option"] = "option"
 
     class Config:
@@ -184,7 +185,8 @@ class ReferencePixelToUnitMethod(Config):
     name: Literal["ReferencePixelToUnitMethod"] = "ReferencePixelToUnitMethod"
     pixelUnit: PixelUnit
     pixelToUnitRatio: PixelToUnitRatio
-    type: Literal["object"] = "object"
+    value: Literal["ReferencePixelToUnitMethod"] = "ReferencePixelToUnitMethod"
+    type: Literal["string"] = "string"
     field: Literal["option"] = "option"
 
     class Config:
