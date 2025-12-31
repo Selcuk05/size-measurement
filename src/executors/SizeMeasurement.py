@@ -20,15 +20,28 @@ class SizeMeasurement(Component):
 
         self.reference_object = None
         self.reference_size = None
-        self.pixel_unit = None
+        self.unit = None
         self.pixel_to_unit_ratio = None
 
         if self.measurement_method == "ReferenceObjectMethod":
-            self.reference_object = self.request.get_param("ReferenceObject")
+            reference_object_selection = self.request.get_param(
+                "ReferenceObjectSelection"
+            )
+
+            self.reference_object = reference_object_selection
+            if reference_object_selection and hasattr(
+                reference_object_selection, "value"
+            ):
+                nested_value = reference_object_selection.value
+                if nested_value and hasattr(nested_value, "value"):
+                    self.reference_object = nested_value.value
+                else:
+                    self.reference_object = nested_value
             self.reference_size = self.request.get_param("ReferenceSize")
+            self.unit = self.request.get_param("Unit")
 
         elif self.measurement_method == "ReferencePixelToUnitMethod":
-            self.pixel_unit = self.request.get_param("PixelUnit")
+            self.unit = self.request.get_param("Unit")
             self.pixel_to_unit_ratio = self.request.get_param("PixelToUnitRatio")
 
     @staticmethod

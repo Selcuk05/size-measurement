@@ -99,24 +99,8 @@ class ReferenceSize(Config):
         title = "Reference Size"
 
 
-class ReferenceObjectMethod(Config):
-    """
-    Configuration for reference object measurement method.
-    """
-
-    name: Literal["ReferenceObjectMethod"] = "ReferenceObjectMethod"
-    referenceObject: ReferenceObjectSelection
-    referenceSize: ReferenceSize
-    value: Literal["ReferenceObjectMethod"] = "ReferenceObjectMethod"
-    type: Literal["string"] = "string"
-    field: Literal["option"] = "option"
-
-    class Config:
-        title = "Reference Object"
-
-
-class PixelUnitCM(Config):
-    name: Literal["PixelUnitCM"] = "PixelUnitCM"
+class UnitCM(Config):
+    name: Literal["UnitCM"] = "UnitCM"
     value: Literal["cm"] = "cm"
     type: Literal["string"] = "string"
     field: Literal["option"] = "option"
@@ -125,8 +109,8 @@ class PixelUnitCM(Config):
         title = "Centimeters"
 
 
-class PixelUnitMM(Config):
-    name: Literal["PixelUnitMM"] = "PixelUnitMM"
+class UnitMM(Config):
+    name: Literal["UnitMM"] = "UnitMM"
     value: Literal["mm"] = "mm"
     type: Literal["string"] = "string"
     field: Literal["option"] = "option"
@@ -135,8 +119,8 @@ class PixelUnitMM(Config):
         title = "Millimeters"
 
 
-class PixelUnitInches(Config):
-    name: Literal["PixelUnitInches"] = "PixelUnitInches"
+class UnitInches(Config):
+    name: Literal["UnitInches"] = "UnitInches"
     value: Literal["inches"] = "inches"
     type: Literal["string"] = "string"
     field: Literal["option"] = "option"
@@ -145,18 +129,35 @@ class PixelUnitInches(Config):
         title = "Inches"
 
 
-class PixelUnit(Config):
+class Unit(Config):
     """
-    Unit of measurement for pixel-to-unit conversion.
+    Unit of measurement for size calculations.
     """
 
-    name: Literal["PixelUnit"] = "PixelUnit"
-    value: Union[PixelUnitCM, PixelUnitMM, PixelUnitInches]
+    name: Literal["Unit"] = "Unit"
+    value: Union[UnitCM, UnitMM, UnitInches]
     type: Literal["object"] = "object"
     field: Literal["dropdownlist"] = "dropdownlist"
 
     class Config:
         title = "Unit"
+
+
+class ReferenceObjectMethod(Config):
+    """
+    Configuration for reference object measurement method.
+    """
+
+    name: Literal["ReferenceObjectMethod"] = "ReferenceObjectMethod"
+    referenceObject: ReferenceObjectSelection
+    referenceSize: ReferenceSize
+    unit: Unit
+    value: Literal["ReferenceObjectMethod"] = "ReferenceObjectMethod"
+    type: Literal["string"] = "string"
+    field: Literal["option"] = "option"
+
+    class Config:
+        title = "Reference Object"
 
 
 class PixelToUnitRatio(Config):
@@ -179,7 +180,7 @@ class ReferencePixelToUnitMethod(Config):
     """
 
     name: Literal["ReferencePixelToUnitMethod"] = "ReferencePixelToUnitMethod"
-    pixelUnit: PixelUnit
+    unit: Unit
     pixelToUnitRatio: PixelToUnitRatio
     value: Literal["ReferencePixelToUnitMethod"] = "ReferencePixelToUnitMethod"
     type: Literal["string"] = "string"
