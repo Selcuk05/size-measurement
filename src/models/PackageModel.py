@@ -2,7 +2,6 @@ from pydantic import Field, validator
 from typing import List, Optional, Union, Literal
 from sdks.novavision.src.base.model import (
     Package,
-    Image,
     Inputs,
     Configs,
     Outputs,
@@ -15,27 +14,10 @@ from sdks.novavision.src.base.model import (
 )
 
 
-class InputImage(Input):
-    name: Literal["inputImage"] = "inputImage"
-    value: Union[List[Image], Image]
-    type: str = "object"
-
-    @validator("type", pre=True, always=True)
-    def set_type_based_on_value(cls, value, values):
-        value = values.get("value")
-        if isinstance(value, Image):
-            return "object"
-        elif isinstance(value, list):
-            return "list"
-
-    class Config:
-        title = "Image"
-
-
 class OutputDetections(Output):
     name: Literal["outputDetections"] = "outputDetections"
     value: List[Detection]
-    type: Literal["list"] = "list"
+    type: str = "object"
 
     class Config:
         title = "Detections"
@@ -224,61 +206,16 @@ class MeasurementMethod(Config):
         json_schema_extra = {"target": "value"}
 
 
-class UnitCM(Config):
-    name: Literal["cm"] = "cm"
-    value: Literal["cm"] = "cm"
-    type: Literal["string"] = "string"
-    field: Literal["option"] = "option"
-
-    class Config:
-        title = "Centimeters"
-
-
-class UnitMM(Config):
-    name: Literal["mm"] = "mm"
-    value: Literal["mm"] = "mm"
-    type: Literal["string"] = "string"
-    field: Literal["option"] = "option"
-
-    class Config:
-        title = "Millimeters"
-
-
-class UnitInches(Config):
-    name: Literal["inches"] = "inches"
-    value: Literal["inches"] = "inches"
-    type: Literal["string"] = "string"
-    field: Literal["option"] = "option"
-
-    class Config:
-        title = "Inches"
-
-
-class Unit(Config):
-    """
-    Unit of measurement for the size values.
-    """
-
-    name: Literal["Unit"] = "Unit"
-    value: Union[UnitCM, UnitMM, UnitInches]
-    type: Literal["object"] = "object"
-    field: Literal["dropdownlist"] = "dropdownlist"
-
-    class Config:
-        title = "Unit"
-
-
 class InputDetections(Input):
     name: Literal["inputDetections"] = "inputDetections"
     value: List[Detection]
-    type: Literal["list"] = "list"
+    type: str = "object"
 
     class Config:
         title = "Detections"
 
 
 class SizeMeasurementInputs(Inputs):
-    inputImage: InputImage
     inputDetections: InputDetections
 
 

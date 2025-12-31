@@ -16,7 +16,6 @@ class SizeMeasurement(Component):
         self.class_label1 = self.request.get_param("ClassLabel1")
         self.class_label2 = self.request.get_param("ClassLabel2")
         self.measurement_method = self.request.get_param("MeasurementMethod")
-        self.image = self.request.get_param("inputImage")
         self.detections = self.request.get_param("inputDetections")
 
         self.reference_object = None
