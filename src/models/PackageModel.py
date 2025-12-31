@@ -32,10 +32,9 @@ class ClassLabel1(Config):
     value: str = Field(default="")
     type: Literal["string"] = "string"
     field: Literal["textInput"] = "textInput"
-    placeHolder: Literal["Enter first class label"] = "Enter first class label"
 
     class Config:
-        title = "Class Label 1"
+        title = "First Class"
 
 
 class ClassLabel2(Config):
@@ -47,10 +46,9 @@ class ClassLabel2(Config):
     value: str = Field(default="")
     type: Literal["string"] = "string"
     field: Literal["textInput"] = "textInput"
-    placeHolder: Literal["Enter second class label"] = "Enter second class label"
 
     class Config:
-        title = "Class Label 2"
+        title = "Second Class"
 
 
 class ReferenceClassLabel1(Config):
@@ -60,7 +58,7 @@ class ReferenceClassLabel1(Config):
     field: Literal["option"] = "option"
 
     class Config:
-        title = "Class Label 1"
+        title = "First Class"
 
 
 class ReferenceClassLabel2(Config):
@@ -70,7 +68,7 @@ class ReferenceClassLabel2(Config):
     field: Literal["option"] = "option"
 
     class Config:
-        title = "Class Label 2"
+        title = "Second Class"
 
 
 class ReferenceObjectSelection(Config):
@@ -96,7 +94,6 @@ class ReferenceSize(Config):
     value: float = Field(ge=0.0)
     type: Literal["number"] = "number"
     field: Literal["textInput"] = "textInput"
-    placeHolder: Literal["Enter reference object size"] = "Enter reference object size"
 
     class Config:
         title = "Reference Size"
@@ -171,7 +168,6 @@ class PixelToUnitRatio(Config):
     value: float = Field(ge=0.0)
     type: Literal["number"] = "number"
     field: Literal["textInput"] = "textInput"
-    placeHolder: Literal["Enter units per pixel"] = "Enter units per pixel"
 
     class Config:
         title = "Units per Pixel"
