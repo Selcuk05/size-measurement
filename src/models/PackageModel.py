@@ -54,7 +54,7 @@ class ClassLabel2(Config):
 
 
 class ReferenceClassLabel1(Config):
-    name: Literal["ClassLabel1"] = "ClassLabel1"
+    name: Literal["ReferenceClassLabel1"] = "ReferenceClassLabel1"
     value: Literal["ClassLabel1"] = "ClassLabel1"
     type: Literal["string"] = "string"
     field: Literal["option"] = "option"
@@ -64,7 +64,7 @@ class ReferenceClassLabel1(Config):
 
 
 class ReferenceClassLabel2(Config):
-    name: Literal["ClassLabel2"] = "ClassLabel2"
+    name: Literal["ReferenceClassLabel2"] = "ReferenceClassLabel2"
     value: Literal["ClassLabel2"] = "ClassLabel2"
     type: Literal["string"] = "string"
     field: Literal["option"] = "option"
@@ -78,7 +78,7 @@ class ReferenceObjectSelection(Config):
     Select which class label will be used as the reference object for size measurement.
     """
 
-    name: Literal["ReferenceObject"] = "ReferenceObject"
+    name: Literal["ReferenceObjectSelection"] = "ReferenceObjectSelection"
     value: Union[ReferenceClassLabel1, ReferenceClassLabel2]
     type: Literal["object"] = "object"
     field: Literal["dropdownlist"] = "dropdownlist"
@@ -119,7 +119,7 @@ class ReferenceObjectMethod(Config):
 
 
 class PixelUnitCM(Config):
-    name: Literal["cm"] = "cm"
+    name: Literal["PixelUnitCM"] = "PixelUnitCM"
     value: Literal["cm"] = "cm"
     type: Literal["string"] = "string"
     field: Literal["option"] = "option"
@@ -129,7 +129,7 @@ class PixelUnitCM(Config):
 
 
 class PixelUnitMM(Config):
-    name: Literal["mm"] = "mm"
+    name: Literal["PixelUnitMM"] = "PixelUnitMM"
     value: Literal["mm"] = "mm"
     type: Literal["string"] = "string"
     field: Literal["option"] = "option"
@@ -139,7 +139,7 @@ class PixelUnitMM(Config):
 
 
 class PixelUnitInches(Config):
-    name: Literal["inches"] = "inches"
+    name: Literal["PixelUnitInches"] = "PixelUnitInches"
     value: Literal["inches"] = "inches"
     type: Literal["string"] = "string"
     field: Literal["option"] = "option"
