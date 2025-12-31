@@ -20,28 +20,16 @@ class SizeMeasurement(Component):
 
         self.reference_object = None
         self.reference_size = None
-        self.unit = None
+        self.unit_value = None
         self.pixel_to_unit_ratio = None
 
         if self.measurement_method == "ReferenceObjectMethod":
-            reference_object_selection = self.request.get_param(
-                "ReferenceObjectSelection"
-            )
-
-            self.reference_object = reference_object_selection
-            if reference_object_selection and hasattr(
-                reference_object_selection, "value"
-            ):
-                nested_value = reference_object_selection.value
-                if nested_value and hasattr(nested_value, "value"):
-                    self.reference_object = nested_value.value
-                else:
-                    self.reference_object = nested_value
+            self.reference_object = self.request.get_param("ReferenceObjectSelection")
             self.reference_size = self.request.get_param("ReferenceSize")
-            self.unit = self.request.get_param("Unit")
+            self.unit_value = self.request.get_param("Unit")
 
         elif self.measurement_method == "ReferencePixelToUnitMethod":
-            self.unit = self.request.get_param("Unit")
+            self.unit_value = self.request.get_param("Unit")
             self.pixel_to_unit_ratio = self.request.get_param("PixelToUnitRatio")
 
     @staticmethod
@@ -53,24 +41,25 @@ class SizeMeasurement(Component):
             return None
 
         for detection in detections:
-            if detection.classLabel.lower() == class_label.lower():
+            if detection["classLabel"].lower() == class_label.lower():
                 return detection
 
         return None
 
     def get_width_from_detection(self, detection):
-        if not detection or not detection.boundingBox:
+        if not detection or not detection.get("boundingBox"):
             return 0.0
 
-        return float(detection.boundingBox.width)
+        return float(detection["boundingBox"]["width"])
 
     def add_size_to_detection(self, detection, size):
         detection_dict = {
-            "boundingBox": detection.boundingBox,
-            "confidence": detection.confidence,
-            "classLabel": detection.classLabel,
-            "classId": detection.classId,
+            "boundingBox": detection["boundingBox"],
+            "confidence": detection["confidence"],
+            "classLabel": detection["classLabel"],
+            "classId": detection["classId"],
             "size": size,
+            "unit": self.unit_value,
         }
         return detection_dict
 
@@ -108,7 +97,7 @@ class SizeMeasurement(Component):
             target_size = self.reference_size * pixel_ratio
 
             for detection in self.detections:
-                detection_label = detection.classLabel
+                detection_label = detection["classLabel"]
                 if detection_label.lower() == reference_label.lower():
                     updated_detection = self.add_size_to_detection(
                         detection, self.reference_size
@@ -127,7 +116,7 @@ class SizeMeasurement(Component):
             detection2 = self.get_detection_by_label(self.detections, self.class_label2)
 
             for detection in self.detections:
-                detection_label = detection.classLabel
+                detection_label = detection["classLabel"]
                 if (
                     detection_label.lower() == self.class_label1.lower()
                     or detection_label.lower() == self.class_label2.lower()
@@ -145,7 +134,6 @@ class SizeMeasurement(Component):
         return updated_detections
 
     def run(self):
-        # Calculate sizes and update detections with size information
         self.output_detections = self.calculate_and_add_sizes()
 
         packageModel = build_response(context=self)
