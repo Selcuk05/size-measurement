@@ -93,7 +93,7 @@ class ReferenceSize(Config):
     """
 
     name: Literal["ReferenceSize"] = "ReferenceSize"
-    value: float = Field(ge=0.0, default=0.0)
+    value: float = Field(ge=0.0)
     type: Literal["number"] = "number"
     field: Literal["textInput"] = "textInput"
     placeHolder: Literal["Enter reference object size"] = "Enter reference object size"
@@ -167,7 +167,7 @@ class PixelToUnitRatio(Config):
     """
 
     name: Literal["PixelToUnitRatio"] = "PixelToUnitRatio"
-    value: float = Field(ge=0.0, default=0.0)
+    value: float = Field(ge=0.0)
     type: Literal["number"] = "number"
     field: Literal["textInput"] = "textInput"
     placeHolder: Literal["Enter units per pixel"] = "Enter units per pixel"
